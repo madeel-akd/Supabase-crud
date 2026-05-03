@@ -7,8 +7,6 @@ const Todo=() => {
   const [todos, setTodos] = useState([])
   const [input, setInput] = useState('')
   const navigate = useNavigate()
-
-  // READ — fetch all todos from Supabase when page loads
   useEffect(() => {
     fetchTodos()
   }, [])
@@ -26,7 +24,6 @@ const Todo=() => {
     }
   }
 
-  // CREATE — add new todo to Supabase
   async function addTodo() {
     if (input === '') return
 
@@ -42,8 +39,6 @@ const Todo=() => {
       setInput('')
     }
   }
-
-  // UPDATE — edit todo title in Supabase
   async function editTodo(id, currentTitle) {
     const newTitle = prompt('Edit your task:', currentTitle)
 
@@ -62,8 +57,6 @@ const Todo=() => {
       }
     }
   }
-
-  // DELETE — remove todo from Supabase
   async function deleteTodo(id) {
     const { error } = await supabase
       .from('todos')
@@ -84,8 +77,6 @@ const Todo=() => {
       <button onClick={() => navigate('/')}>← Back to Home</button>
 
       <h1>My Todos</h1>
-
-      {/* Input to add todo */}
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
         <input
           type="text"
@@ -96,8 +87,6 @@ const Todo=() => {
         />
         <button onClick={addTodo}>Add</button>
       </div>
-
-      {/* Todo list */}
       {todos.length === 0 ? (
         <p>No todos yet. Add one above!</p>
       ) : (
